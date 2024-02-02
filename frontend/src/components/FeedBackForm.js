@@ -26,17 +26,17 @@ const Container = ({ children }) => (
     </section>
 );
 
-const TextInput = ({ id, label, onChange }) => (
+const TextInput = ({ id, label, onChange, value }) => (
     <div className="form-outline">
         <label className="form-label" htmlFor={id}>{label}</label>
-        <input type="text" id={id} className="form-control" onChange={onChange} />
+        <input type="text" id={id} className="form-control" onChange={onChange} value={value} />
     </div>
 );
 
-const TextArea = ({ id, label, onChange }) => (
+const TextArea = ({ id, label, onChange, value }) => (
     <div className="form-outline">
         <label className="form-label" htmlFor={id}>{label}</label>
-        <textarea className="form-control" id={id} rows="4" onChange={onChange}></textarea>
+        <textarea className="form-control" id={id} rows="4" onChange={onChange} value={value}></textarea>
     </div>
 );
 
@@ -60,6 +60,8 @@ const FeedBackForm = () => {
             .then(response => {
                 // Show success toast message
                 toast.success('Data sent successfully');
+                setTitle('');
+                setMessage('');
             })
             .catch(error => {
                 // Show error toast message
@@ -73,8 +75,8 @@ const FeedBackForm = () => {
             <ToastContainer />
             <Container>
                 <Card header="Give Your Feedback Here">
-                    <TextInput id="titleText" label="Title" onChange={(e) => setTitle(e.target.value)} />
-                    <TextArea id="textAreaExample" label="Message" onChange={(e) => setMessage(e.target.value)} />
+                    <TextInput id="titleText" label="Title" onChange={(e) => setTitle(e.target.value)} value={title} />
+                    <TextArea id="textAreaExample" label="Message" onChange={(e) => setMessage(e.target.value)} value={message} />
                     <SubmitButton onClick={handleSubmitBtn} />
                 </Card>
             </Container>
